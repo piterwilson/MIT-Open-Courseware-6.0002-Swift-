@@ -33,21 +33,21 @@ Knapsack 0/1 Problem
              result = (withoutVal, withoutToTake)
      return result
  */
-func maxCalories(toConsider: [Food], avail: Double) -> (Double, [Food]) {
+func maxValue(toConsider: [Food], avail: Double) -> (Double, [Food]) {
     if toConsider.isEmpty || avail == 0.0 {
         return (0.0, [])
     } else if (toConsider[0].calories > avail) {
         // Explore right branch only
-        return maxCalories(toConsider: Array(toConsider.dropFirst()), avail: avail)
+        return maxValue(toConsider: Array(toConsider.dropFirst()), avail: avail)
     } else {
         // Explore left branch (withVal, withToTake)
         // This branch explores taking the first `Food` item
         guard let nextItem = toConsider.first else { fatalError() }
-        var leftBranchResult = maxCalories(toConsider: Array(toConsider.dropFirst()), avail: avail - nextItem.calories)
-        leftBranchResult.0 += nextItem.calories
+        var leftBranchResult = maxValue(toConsider: Array(toConsider.dropFirst()), avail: avail - nextItem.calories)
+        leftBranchResult.0 += nextItem.value
         // Explore right branch (withoutVal, withoutToTake)
         // This branch explores NOT taking the first `Food` item
-        let rightBranchResult = maxCalories(toConsider: Array(toConsider.dropFirst()), avail: avail)
+        let rightBranchResult = maxValue(toConsider: Array(toConsider.dropFirst()), avail: avail)
         // Choose better branch
         if leftBranchResult.0 > rightBranchResult.0 {
             return (leftBranchResult.0, leftBranchResult.1 + [nextItem])
@@ -65,7 +65,5 @@ func maxCalories(toConsider: [Food], avail: Double) -> (Double, [Food]) {
 let stopWatch = StopWatch()
 [5, 10, 15, 20].forEach { numItems in
     let items = buildLargeMenu(numItems: numItems, maxVal: 90.0, maxCost: 250.0)
-    stopWatch.start()
-    testMaxCalories(foods: items, maxUnits: 750, algorithm: maxCalories(toConsider:avail:))
-    print("testMaxVal took \(stopWatch.mark()) sec.")
+    testMaxValue(foods: items, maxUnits: 750, algorithm: maxValue(toConsider:avail:))
 }
