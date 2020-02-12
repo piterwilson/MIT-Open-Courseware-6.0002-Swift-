@@ -12,8 +12,8 @@ class Food(object):
     def density(self):
         return self.getValue()/self.getCost()
     def __str__(self):
-        return self.name + ': <' + str(self.value)\
-                 + ', ' + str(self.calories) + '>'
+        return 'food: ' + self.name + ': <value: ' + str(self.value)\
+                 + ', calories: ' + str(self.calories) + '>'
 
 def buildMenu(names, values, calories):
     menu = []
@@ -87,15 +87,14 @@ def testMaxVal(foods, maxUnits, printItems = True):
         for item in taken:
             print('   ', item)
 
-names = ['wine', 'beer', 'pizza', 'burger', 'fries',
-         'cola', 'apple', 'donut', 'cake']
-values = [89,90,95,100,90,79,50,10]
-calories = [123,154,258,354,365,150,95,195]
-foods = buildMenu(names, values, calories)
+# names = ['wine', 'beer', 'pizza', 'burger', 'fries',
+#          'cola', 'apple', 'donut', 'cake']
+# values = [89,90,95,100,90,79,50,10]
+# calories = [123,154,258,354,365,150,95,195]
+# foods = buildMenu(names, values, calories)
 
-testGreedys(foods, 750)
-print('')
-testMaxVal(foods, 750)
+# testGreedys(foods, 750)
+# testMaxVal(foods, 750)
 
 import random
 
@@ -177,6 +176,6 @@ def testMaxVal(foods, maxUnits, algorithm, printItems = True):
         for item in taken:
             print('   ', item)
           
-#for numItems in (5, 10, 15, 20, 25, 30, 35, 40, 45, 50):
-#    items = buildLargeMenu(numItems, 90, 250)
-#    testMaxVal(items, 750, fastMaxVal, True)
+for numItems in (5, 10, 15):
+   items = buildLargeMenu(numItems, 90, 250)
+   testMaxVal(items, 750, maxVal, True)

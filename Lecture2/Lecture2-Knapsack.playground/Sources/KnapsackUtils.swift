@@ -1,6 +1,23 @@
 import Foundation
 
 /**
+ def buildMenu(names, values, calories):
+     menu = []
+     for i in range(len(values)):
+         menu.append(Food(names[i], values[i],
+                           calories[i]))
+     return menu
+ */
+public func buildMenu(names: [String], values: [Double], calories: [Double]) -> [Food] {
+    guard names.count == values.count, values.count == calories.count else {
+        fatalError("`names`, `values` and `calories` must have the same `count`")
+    }
+    return (0..<names.count).map {index in
+        return Food(name: names[index], value: values[index], calories: calories[index])
+    }
+}
+
+/**
  def buildLargeMenu(numItems, maxVal, maxCost):
      items = []
      for i in range(numItems):
@@ -32,11 +49,15 @@ public func testMaxValue(foods: [Food], maxUnits: Double, algorithm: ([Food], Do
     print("Use search tree to allocate \(maxUnits) calories")
     let stopWatch = StopWatch()
     stopWatch.start()
-    let result = algorithm(foods, maxUnits)
-    let totalCalories = result.1.reduce(0.0) { (value: Double, food: Food) -> Double in
-        value + food.calories
-    }
+    let result: (Double, [Food]) = algorithm(foods, maxUnits)
+    let totalCalories = getTotalCalories(in: result.1)
     print("result took \(stopWatch.mark()) sec.")
     print("total value of items taken $\(result.0) (\(totalCalories) calories)")
     result.1.forEach { print (" \($0)")}
+}
+
+public func getTotalCalories(in foods: [Food]) -> Double {
+    return foods.reduce(0.0) { (value: Double, food: Food) -> Double in
+        value + food.calories
+    }
 }

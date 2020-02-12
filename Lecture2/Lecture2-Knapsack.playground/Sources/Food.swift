@@ -25,6 +25,9 @@ public struct Food: CustomStringConvertible {
         self.value = value
         self.calories = calories
     }
+    public func getCost() -> Double {
+        self.calories
+    }
     public var density: Double {
         value / calories
     }
