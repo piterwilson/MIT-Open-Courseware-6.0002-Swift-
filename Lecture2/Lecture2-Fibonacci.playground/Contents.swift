@@ -1,48 +1,11 @@
 import Foundation
 
+let stopWatch = StopWatch()
 /**
- class Food(object):
-     def __init__(self, n, v, w):
-         self.name = n
-         self.value = v
-         self.calories = w
-     def getValue(self):
-         return self.value
-     def getCalories(self):
-         return self.calories
-     def density(self):
-         return self.getValue()/self.getCalories()
-     def __str__(self):
-         return self.name + ': < value: ' + str(self.value)\
-                  + ', calories: ' + str(self.calories) + '>'
+ 
+ Fibonacci Examples
+ 
  */
-struct Food: CustomStringConvertible {
-    var name: String
-    var value: Double
-    var calories: Double
-    var density: Double {
-        value / calories
-    }
-    var description: String {
-        "\(name) : < value: \(value), calories: \(calories)"
-    }
-}
-
-/**
- def buildLargeMenu(numItems, maxVal, maxCost):
-     items = []
-     for i in range(numItems):
-         items.append(Food(str(i),
-                           random.randint(1, maxVal),
-                           random.randint(1, maxCost)))
-     return items
- */
-func buildLargeMenu(numItems: Int, maxVal: Double, maxCost: Double) -> [Food] {
-    let items: [Food] = (0..<numItems).map { index in
-        Food(name: "Food \(index)", value: Double.random(in: (1...maxVal)), calories: Double.random(in: 0...maxCost))
-    }
-    return items
-}
 
 /**
  "Slow" Fibonacci implementation
@@ -70,13 +33,13 @@ func fib(_ n: Int) -> Double {
 }
 
 /**
- Very slow fib function ... gets slow around 20s
+ Slow fib function.
  */
-/*
-for i in (0...121) {
+stopWatch.start()
+for i in (0...20) { // I only go to 20, don't have patience to go all the way to 121
     print("fib of \(i) : \(fib(i))")
 }
- */
+print("time elapsed: \(stopWatch.mark()) sec.") // time elapsed: 1.025583028793335 sec.
 
 /**
  "Fast" Fibonacci implementation
@@ -111,6 +74,8 @@ func fastFib(_ n: Int, memo: inout [Int: Double]) -> Double {
 
 // fast fib is fast but requires a "cache" defined outside the function. Can get to value 121 quite fast.
 var memo: [Int: Double] = [:] // start a cache "memo" to look up values
+stopWatch.start()
 for i in (0...121) {
     print("fib of \(i) : \(fastFib(i, memo: &memo))")
 }
+print("time elapsed: \(stopWatch.mark()) sec.") // time elapsed: 0.01671004295349121 sec.
