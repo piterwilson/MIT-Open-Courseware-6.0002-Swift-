@@ -27,10 +27,10 @@ public func buildLargeMenu(numItems: Int, maxVal: Double, maxCost: Double) -> [F
          for item in taken:
              print('   ', item)
  */
-public func testMaxVal(foods: [Food], maxUnits: Double, algorithm: ([Food], Double) -> (Double, [Food]) ) {
+public func testMaxCalories(foods: [Food], maxUnits: Double, algorithm: ([Food], Double) -> (Double, [Food]) ) {
     print("Menu contains \(foods.count) items")
     print("Use search tree to allocate \(maxUnits) calories")
     let result = algorithm(foods, maxUnits)
-    print("total value of items taken $\(result.0)")
+    print("total calories of items taken \(result.0)")
     result.1.forEach { print (" \($0)")}
 }
