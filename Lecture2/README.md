@@ -1,6 +1,12 @@
 # Lecture 2: Optimization Problems
 
-The initial examples with the fibonacci sequence functions demonstrate how having a cache (memorization) can be a way to optimize a problem where there is **"optimal substructure"** and **"overlapping subproblems"**.
+## Example Lecture2-Fibonacci 
+
+Fibonacci sequence functions demonstrate how having a cache (memorization) can be a way to optimize a problem where there is **"optimal substructure"** and **"overlapping subproblems"**.
+
+## Example Lecture2-Knapsack
+
+This example pits a greedy vs a search tree algorithms to find the best solution to the "Knapsack" problem which in this case refers to finding set of `Food` items with the maximum sum value ($) possible with a constained value of sum calories (cost).
 
 ## Python to Swift notes
 
