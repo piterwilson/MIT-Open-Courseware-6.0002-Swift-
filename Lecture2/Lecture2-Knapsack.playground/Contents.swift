@@ -129,7 +129,6 @@ func maxValue(toConsider: [Food], avail: Double) -> (Double, [Food]) {
 }
 
 let stopWatch = StopWatch()
-
 let names = ["wine", "beer", "pizza", "burger", "fries", "cola", "apple", "donut"]
 let values = [89.0, 90.0, 95.0, 100.0, 90.0, 79.0, 50.0, 10.0]
 let calories = [123.0, 154.0, 258.0, 354.0, 365.0, 150.0, 95.0, 195.0]
