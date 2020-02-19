@@ -56,7 +56,17 @@ public protocol GraphProtocol: class, CustomStringConvertible {
     func getNode(withName name: String) throws -> Node
 }
 
-extension GraphProtocol {
+public class DiGraph: GraphProtocol {
+    public required init() {}
+    public var edges: [Node: [Node]] = [:]
+    public func add(edge: Edge) throws {
+        let source = edge.source
+        let destination = edge.destination
+        guard has(node: source), has(node: destination) else {
+            throw GraphError.nodeNotInGraph
+        }
+        edges[source]?.append(destination)
+    }
     public func add(node: Node) throws {
         if edges.keys.contains(node) {
             throw GraphError.duplicateNode
@@ -88,19 +98,6 @@ extension GraphProtocol {
             }
         }
         return result
-    }
-}
-
-public class DiGraph: GraphProtocol {
-    public required init() {}
-    public var edges: [Node: [Node]] = [:]
-    public func add(edge: Edge) throws {
-        let source = edge.source
-        let destination = edge.destination
-        guard has(node: source), has(node: destination) else {
-            throw GraphError.nodeNotInGraph
-        }
-        edges[source]?.append(destination)
     }
 }
 
