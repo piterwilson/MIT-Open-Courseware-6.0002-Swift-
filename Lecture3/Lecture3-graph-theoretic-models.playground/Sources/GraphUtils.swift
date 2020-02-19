@@ -40,3 +40,27 @@ public func buildCityGraphType(_ graphType: DiGraph.Type) -> DiGraph {
         fatalError("\(error)")
     }
 }
+
+/**
+ def printPath(path):
+     """Assumes path is a list of nodes"""
+     result = ''
+     for i in range(len(path)):
+         result = result + str(path[i])
+         if i != len(path) - 1:
+             result = result + '->'
+     return result
+ */
+func print(path: [Node]) -> String {
+    var result = ""
+    guard let last = path.last else {
+        return ""
+    }
+    path.forEach {node in
+        result += "\(node)"
+        if node != last {
+            result += " -> "
+        }
+    }
+    return result
+}
