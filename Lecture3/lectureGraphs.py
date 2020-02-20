@@ -129,8 +129,8 @@ def testSP(source, destination):
 
 g = buildCityGraph(Digraph)
 print(g)
-# testSP('Chicago', 'Boston')
-# print()
+testSP('Chicago', 'Boston')
+#print()
 #testSP('Boston', 'Phoenix')
 #print()
 

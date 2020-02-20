@@ -51,10 +51,11 @@ public func buildCityGraphType(_ graphType: DiGraph.Type) -> DiGraph {
              result = result + '->'
      return result
  */
-func print(path: [Node]) -> String {
+public func print(path: [Node]) {
     var result = ""
     guard let last = path.last else {
-        return ""
+        print("")
+        return
     }
     path.forEach {node in
         result += "\(node)"
@@ -62,5 +63,5 @@ func print(path: [Node]) -> String {
             result += " -> "
         }
     }
-    return result
+    print(result)
 }

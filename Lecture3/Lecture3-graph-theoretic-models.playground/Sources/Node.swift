@@ -9,9 +9,12 @@ import Foundation
 //    def __str__(self):
 //        return self.name
 
-public struct Node: Hashable {
+public struct Node: Hashable, CustomStringConvertible {
     public let name: String
     public init(name: String) {
         self.name = name
+    }
+    public var description: String {
+        return "<\(name)>"
     }
 }
