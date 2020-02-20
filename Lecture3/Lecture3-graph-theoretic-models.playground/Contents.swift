@@ -9,7 +9,7 @@ import Foundation
 func shortestpath(graph: DiGraph, start: Node, end: Node) -> [Node]? {
     var path: [Node] = []
     var shortest: [Node]? = nil
-    return DFS(graph: graph, start: start, end: end, path: &path, shortest: &shortest)
+    return DFS(graph: graph, start: start, end: end, path: path, shortest: &shortest)
 }
 /**
  def testSP(source, destination):
@@ -58,19 +58,19 @@ func testSP(source: Node, destination: Node) {
  
  */
 
-func DFS(graph: GraphProtocol, start: Node, end: Node, path: inout [Node], shortest: inout [Node]?) -> [Node]? {
-    path += [start]
+func DFS(graph: GraphProtocol, start: Node, end: Node, path: [Node], shortest: inout [Node]?) -> [Node]? {
+    var pathCopy = path
+    pathCopy += [start]
     print("Current DFS path:")
-    print(path: path)
+    print(path: pathCopy)
     if start == end {
         return path
     }
     do {
-        let children = try graph.childrenOf(node: start)
         for node in try graph.childrenOf(node: start) {
-            if !path.contains(node) {
+            if !pathCopy.contains(node) {
                 if shortest == nil || (shortest!.isEmpty || path.count < shortest!.count) {
-                    if let newPath = DFS(graph: graph, start: node, end: end, path: &path, shortest: &shortest) {
+                    if let newPath = DFS(graph: graph, start: node, end: end, path: pathCopy, shortest: &shortest) {
                         shortest = newPath
                     }
                 }
@@ -80,9 +80,6 @@ func DFS(graph: GraphProtocol, start: Node, end: Node, path: inout [Node], short
         }
     } catch {
         fatalError("\(error)")
-    }
-    if shortest == nil {
-        path.popLast()
     }
     return shortest
 }
