@@ -6,10 +6,19 @@ import Foundation
         Returns a shortest path from start to end in graph"""
      return DFS(graph, start, end, [], None, toPrint)
  */
-func shortestpath(graph: DiGraph, start: Node, end: Node) -> [Node]? {
-    var path: [Node] = []
+func shortestpathDFS(graph: DiGraph, start: Node, end: Node) -> [Node]? {
     var shortest: [Node]? = nil
-    return DFS(graph: graph, start: start, end: end, path: path, shortest: &shortest)
+    return DFS(graph: graph, start: start, end: end, path: [], shortest: &shortest)
+}
+
+/**
+ def shortestPath(graph, start, end, toPrint = False):
+     """Assumes graph is a Digraph; start and end are nodes
+        Returns a shortest path from start to end in graph"""
+     return BFS(graph, start, end, toPrint)
+ */
+func shortestpathBFS(graph: DiGraph, start: Node, end: Node) -> [Node]? {
+    return BFS(graph: graph, start: start, end: end)
 }
 /**
  def testSP(source, destination):
@@ -23,12 +32,25 @@ func shortestpath(graph: DiGraph, start: Node, end: Node) -> [Node]? {
 
  */
 func testSP(source: Node, destination: Node) {
+    let stopWatch = StopWatch()
     let graph = buildCityGraphType(DiGraph.self)
     print("graph:")
     print("\(graph)")
-    if let sp = shortestpath(graph: graph, start: source, end: destination), !sp.isEmpty {
+    print("-> using DFS")
+    stopWatch.start()
+    if let sp = shortestpathDFS(graph: graph, start: source, end: destination), !sp.isEmpty {
         print("shortest path from \(source) to \(destination) is")
         print(path: sp)
+        print("took \(stopWatch.mark()) secs")
+    } else {
+        print("There is no path from \(source) to \(destination)")
+    }
+    print("-> using BFS")
+    stopWatch.start()
+    if let sp = shortestpathBFS(graph: graph, start: source, end: destination), !sp.isEmpty {
+        print("shortest path from \(source) to \(destination) is")
+        print(path: sp)
+        print("took \(stopWatch.mark()) secs")
     } else {
         print("There is no path from \(source) to \(destination)")
     }
@@ -64,7 +86,7 @@ func DFS(graph: GraphProtocol, start: Node, end: Node, path: [Node], shortest: i
     print("Current DFS path:")
     print(path: pathCopy)
     if start == end {
-        return path
+        return path + [end]
     }
     do {
         for node in try graph.childrenOf(node: start) {
@@ -84,6 +106,60 @@ func DFS(graph: GraphProtocol, start: Node, end: Node, path: [Node], shortest: i
     return shortest
 }
 
+/**
+ def BFS(graph, start, end, toPrint = False):
+     """Assumes graph is a Digraph; start and end are nodes
+        Returns a shortest path from start to end in graph"""
+     initPath = [start]
+     pathQueue = [initPath]
+     while len(pathQueue) != 0:
+         #Get and remove oldest element in pathQueue
+         if printQueue:
+             print('Queue:', len(pathQueue))
+             for p in pathQueue:
+                 print(printPath(p))
+         tmpPath = pathQueue.pop(0)
+         if toPrint:
+             print('Current BFS path:', printPath(tmpPath))
+             print()
+         lastNode = tmpPath[-1]
+         if lastNode == end:
+             return tmpPath
+         for nextNode in graph.childrenOf(lastNode):
+             if nextNode not in tmpPath:
+                 newPath = tmpPath + [nextNode]
+                 pathQueue.append(newPath)
+     return None
+ */
+func BFS(graph: DiGraph, start: Node, end: Node) -> [Node]? {
+    var pathQueue: [[Node]] = [[start]]
+    repeat {
+        // Get and remove oldest element in pathQueue
+        print("Queue:")
+        pathQueue.forEach { print(path: $0) }
+        let tmpPath = pathQueue.removeFirst()
+        print("Current BFS path:")
+        print(path: tmpPath)
+        let lastNode: Node? = tmpPath.last
+        if let lastNode = lastNode {
+            if lastNode == end {
+                return tmpPath
+            }
+            do {
+                for nextNode in try graph.childrenOf(node: lastNode) {
+                    if !tmpPath.contains(nextNode) {
+                        let newPath = tmpPath + [nextNode]
+                        pathQueue.append(newPath)
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
+    } while (!pathQueue.isEmpty)
+    return nil
+}
+
 let graph = buildCityGraphType(DiGraph.self)
 do {
     if let start = try? graph.getNode(withName: "Phoenix") {
@@ -95,6 +171,7 @@ do {
 } catch {
     print(error)
 }
-
+print(" --- test 1 ---")
 testSP(source: Node(name: "Chicago"), destination: Node(name: "Boston"))
-// testSP(source: Node(name: "Boston"), destination: Node(name: "Phoenix"))
+print(" --- test 2 ---")
+testSP(source: Node(name: "Boston"), destination: Node(name: "Phoenix"))
