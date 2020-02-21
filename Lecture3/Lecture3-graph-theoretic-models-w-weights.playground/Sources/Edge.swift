@@ -11,7 +11,7 @@ import Foundation
 //    def __str__(self):
 //        return self.src.getName() + '->' + self.dest.getName()
 
-public struct Edge {
+public struct Edge: CustomStringConvertible {
     public let source: Node
     public let destination: Node
     public let weight: Int
@@ -19,5 +19,8 @@ public struct Edge {
         self.source = source
         self.destination = destination
         self.weight = weight
+    }
+    public var description: String {
+        return "Edge(\(source)->\(destination) \(weight))"
     }
 }

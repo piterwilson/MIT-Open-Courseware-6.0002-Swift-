@@ -19,13 +19,13 @@ import Foundation
      return g
  */
 
-public func buildCityGraphType() -> DiGraph {
+public func buildCityGraphTypeUSA() -> DiGraph {
     do {
         let graph: DiGraph = DiGraph()
         for name in ["Boston", "Providence", "New York", "Chicago", "Denver", "Phoenix", "Los Angeles"] {
             try graph.add(node: Node(name: name))
         }
-        try graph.add(edge: Edge(source: try graph.getNode(withName: "Boston"), destination: try graph.getNode(withName: "Providence")))
+        try graph.add(edge: Edge(source: try graph.getNode(withName: "Boston"), destination: try graph.getNode(withName: "Providence"), weight: 3))
         try graph.add(edge: Edge(source: try graph.getNode(withName: "Boston"), destination: try graph.getNode(withName: "New York")))
         try graph.add(edge: Edge(source: try graph.getNode(withName: "Providence"), destination: try graph.getNode(withName: "Boston")))
         try graph.add(edge: Edge(source: try graph.getNode(withName: "Providence"), destination: try graph.getNode(withName: "New York")))

@@ -23,14 +23,14 @@ func shortestpathDFS(graph: DiGraph, start: Node, end: Node) -> [Node]? {
  */
 func testSP(source: Node, destination: Node) {
     let stopWatch = StopWatch()
-    let graph = buildCityGraphType()
+    let graph = buildCityGraphTypeUSA()
     print("graph:")
     print("\(graph)")
     print("-> using DFS")
     stopWatch.start()
     if let sp = shortestpathDFS(graph: graph, start: source, end: destination), !sp.isEmpty {
         print("shortest path from \(source) to \(destination) is")
-        graph.log(path: sp)
+        print(sp)
         print("took \(stopWatch.mark()) secs")
     } else {
         print("There is no path from \(source) to \(destination)")
@@ -61,7 +61,6 @@ func testSP(source: Node, destination: Node) {
  
  */
 func DFS(graph: GraphProtocol, start: Node, end: Node, path: [Node], shortest: inout [Node]?) -> [Node]? {
-    print("DFS called with start \(start), end \(end), path \(path), shortest \(shortest)")
     var pathCopy = path
     pathCopy += [start]
     print("Current DFS path:")
@@ -72,9 +71,8 @@ func DFS(graph: GraphProtocol, start: Node, end: Node, path: [Node], shortest: i
     do {
         for node in try graph.childrenOf(node: start) {
             if !pathCopy.contains(node) {
-                if shortest == nil || (shortest!.isEmpty || pathCopy.count < shortest!.count) {
+                if shortest == nil || graph.calculateWeight(in: path) < graph.calculateWeight(in: shortest) {
                     if let newPath = DFS(graph: graph, start: node, end: end, path: pathCopy, shortest: &shortest) {
-                        print("--> found route to end \(newPath)")
                         shortest = newPath
                     }
                 }
@@ -88,17 +86,6 @@ func DFS(graph: GraphProtocol, start: Node, end: Node, path: [Node], shortest: i
     return shortest
 }
 
-let graph = buildCityGraphType()
-do {
-    if let start = try? graph.getNode(withName: "Phoenix") {
-        print("start with \(start)")
-        for node in try graph.childrenOf(node: start) {
-            print("child node \(node)")
-        }
-    }
-} catch {
-    print(error)
-}
 //print(" --- test 1 ---")
 //testSP(source: Node(name: "Chicago"), destination: Node(name: "Boston"))
 print(" --- test 2 ---")

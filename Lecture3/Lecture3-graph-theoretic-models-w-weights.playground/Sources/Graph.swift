@@ -55,7 +55,8 @@ public protocol GraphProtocol: class, CustomStringConvertible {
     func childrenOf(node: Node) throws -> [Node]
     func has(node: Node) -> Bool
     func getNode(withName name: String) throws -> Node
-    func calculateWeight(in path: [Node]) throws -> Int
+    func getEdge(source: Node, destination: Node) throws -> Edge
+    func calculateWeight(in path: [Node]?) -> Int
     func log(path: [Node])
 }
 
@@ -73,37 +74,41 @@ public class DiGraph: GraphProtocol {
         }
         edges[source]?.append(edge)
     }
-    public func calculateWeight(in path: [Node]) throws -> Int {
-        guard path.count > 1, let last = path.last else {
+    public func calculateWeight(in path: [Node]?) -> Int {
+        do {
+            guard let path = path else {
+                return 0
+            }
+            guard path.count > 1, let last = path.last else {
+                return 0
+            }
+            var result = 0
+            for (index, node) in path.enumerated() where node != last {
+                // find edge with the next node and add the weight
+                let next = path[index + 1]
+                let edge = try getEdge(source: node, destination: next)
+                result += edge.weight
+            }
+            print("path \(path) weights: \(result)")
+            return result
+        } catch {
             return 0
         }
-        var result = 0
-        for (index, node) in path.enumerated() where node != last {
-            // find edge with the next node and add the weight
-            let next = path[index + 1]
-            let edge = try getEdge(source: node, destination: next)
-            result += edge.weight
-        }
-        return result
     }
     public func log(path: [Node]) {
-        do {
-            var result = ""
-            guard let last = path.last else {
-                print("")
-                return
-            }
-            path.forEach {node in
-                result += "\(node)"
-                if node != last {
-                    result += " -> "
-                }
-            }
-            let weight = try calculateWeight(in: path)
-            print("\(result) w: \(weight)")
-        } catch {
-            print(error)
+        var result = ""
+        guard let last = path.last else {
+            print("")
+            return
         }
+        path.forEach {node in
+            result += "\(node)"
+            if node != last {
+                result += " -> "
+            }
+        }
+        let weight = calculateWeight(in: path)
+        print("\(result) w: \(weight)")
     }
     public func getEdge(source: Node, destination: Node) throws -> Edge {
         guard let edgesInNode = edges[source] else {
