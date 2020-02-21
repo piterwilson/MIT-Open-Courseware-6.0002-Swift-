@@ -42,6 +42,8 @@ import Foundation
          Digraph.addEdge(self, rev)
  */
 
+public typealias Path = [Node]
+
 public enum GraphError: Error {
     case duplicateNode
     case nodeNotInGraph(String)
@@ -62,6 +64,7 @@ public protocol GraphProtocol: class, CustomStringConvertible {
 
 public class DiGraph: GraphProtocol {
     public required init() {}
+    private var pathsWeightsCache: [Path: Int] = [:]
     public var edges: [Node: [Edge]] = [:]
     public func add(edge: Edge) throws {
         let source = edge.source
@@ -74,13 +77,17 @@ public class DiGraph: GraphProtocol {
         }
         edges[source]?.append(edge)
     }
-    public func calculateWeight(in path: [Node]?) -> Int {
+    public func calculateWeight(in path: Path?) -> Int {
         do {
             guard let path = path else {
                 return 0
             }
             guard path.count > 1, let last = path.last else {
                 return 0
+            }
+            if let result = pathsWeightsCache[path] {
+                print("path \(path) weights: \(result) (cached)")
+                return result
             }
             var result = 0
             for (index, node) in path.enumerated() where node != last {
@@ -90,6 +97,7 @@ public class DiGraph: GraphProtocol {
                 result += edge.weight
             }
             print("path \(path) weights: \(result)")
+            pathsWeightsCache[path] = result
             return result
         } catch {
             return 0
