@@ -31,7 +31,7 @@ class Edge(object):
                
 class Digraph(object):
     """edges is a dict mapping each node to a list of
-    its children"""
+    its children Edges"""
     def __init__(self):
         self.edges = {}
     def calculateWeightInPath(self, path):
