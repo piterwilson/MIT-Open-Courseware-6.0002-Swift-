@@ -34,6 +34,21 @@ class Digraph(object):
     its children"""
     def __init__(self):
         self.edges = {}
+    def calculateWeightInPath(self, path):
+        """
+        Assumes path is an Array of Node.
+        Returns: Integer, sum of the weight property in the Node Array
+        """
+        if path == None:
+            return 0
+        elif len(path) == 0:
+            return 0
+        else:
+            print('path is ', path)
+            result = 0
+            for i in range(len(path)):
+                print(i)
+            return result
     def addNode(self, node):
         if node in self.edges:
             raise ValueError('Duplicate node')
@@ -73,16 +88,16 @@ def buildCityGraph(graphType):
     for name in ('Boston', 'Providence', 'New York', 'Chicago',
                  'Denver', 'Phoenix', 'Los Angeles'): #Create 7 nodes
         g.addNode(Node(name))
-    g.addEdge(Edge(g.getNode('Boston'), g.getNode('Providence')))
-    g.addEdge(Edge(g.getNode('Boston'), g.getNode('New York')))
-    g.addEdge(Edge(g.getNode('Providence'), g.getNode('Boston')))
-    g.addEdge(Edge(g.getNode('Providence'), g.getNode('New York')))
-    g.addEdge(Edge(g.getNode('New York'), g.getNode('Chicago')))
-    g.addEdge(Edge(g.getNode('Chicago'), g.getNode('Denver')))
-    g.addEdge(Edge(g.getNode('Chicago'), g.getNode('Phoenix')))
-    g.addEdge(Edge(g.getNode('Denver'), g.getNode('Phoenix')))
-    g.addEdge(Edge(g.getNode('Denver'), g.getNode('New York')))
-    g.addEdge(Edge(g.getNode('Los Angeles'), g.getNode('Boston')))
+    g.addEdge(Edge(g.getNode('Boston'), g.getNode('Providence'), 3))
+    g.addEdge(Edge(g.getNode('Boston'), g.getNode('New York'), 1))
+    g.addEdge(Edge(g.getNode('Providence'), g.getNode('Boston'), 1))
+    g.addEdge(Edge(g.getNode('Providence'), g.getNode('New York'), 1))
+    g.addEdge(Edge(g.getNode('New York'), g.getNode('Chicago'), 1))
+    g.addEdge(Edge(g.getNode('Chicago'), g.getNode('Denver'), 1))
+    g.addEdge(Edge(g.getNode('Chicago'), g.getNode('Phoenix'), 10))
+    g.addEdge(Edge(g.getNode('Denver'), g.getNode('Phoenix'), 1))
+    g.addEdge(Edge(g.getNode('Denver'), g.getNode('New York'), 1))
+    g.addEdge(Edge(g.getNode('Los Angeles'), g.getNode('Boston'), 1))
     return g
 
 
@@ -132,7 +147,9 @@ def testSP(source, destination):
 
 g = buildCityGraph(Digraph)
 print(g)
-testSP('Chicago', 'Boston')
+path = [Node('Boston'), Node('Providence'), Node('New York')]
+g.calculateWeightInPath(path)
+#testSP('Chicago', 'Boston')
 #print()
 #testSP('Boston', 'Phoenix')
 #print()
