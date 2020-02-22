@@ -27,7 +27,7 @@ class Edge(object):
     def getDestination(self):
         return self.dest
     def __str__(self):
-        return self.src.getName() + '->' + self.dest.getName()
+        return self.src.getName() + '->' + self.dest.getName() + ' weight: ' + str(self.getWeight())
                
 class Digraph(object):
     """edges is a dict mapping each node to a list of
@@ -46,8 +46,12 @@ class Digraph(object):
         else:
             print('path is ', path)
             result = 0
-            for i in range(len(path)):
-                print(i)
+            for i in range(len(path) - 1):
+                source = path[i]
+                destination = path[i + 1]
+                if destination != None:
+                    edge = self.getEdge(source, destination)
+                    result = result + edge.getWeight()
             return result
     def addNode(self, node):
         if node in self.edges:
@@ -60,6 +64,24 @@ class Digraph(object):
         if not (src in self.edges and dest in self.edges):
             raise ValueError('Node not in graph')
         self.edges[src].append(edge)
+    def getEdge(self, source, destination):
+        """
+        Assumes source and destination are Nodes joined by an Edge.
+        Returns: Edge joining source and destination if it exists.
+        """
+        src = self.getNode(source.getName())
+        dest = self.getNode(destination.getName())
+        if src == None:
+            raise ValueError('Node not in Graph ',source)
+        if dest == None:
+            raise ValueError('Node not in Graph ',destination)
+        print('get edges with source',src)
+        edges = self.edges[src]
+        for edge in edges:
+            if edge.getDestination() == dest:
+                print('found edge',edge)
+                return edge
+        raise ValueError('No Edge found between ',source, destination)
     def childrenOf(self, node):
         return map(lambda x: x.getDestination(), self.edges) 
     def hasNode(self, node):
@@ -149,7 +171,8 @@ def testSP(source, destination):
 g = buildCityGraph(Digraph)
 print(g)
 path = [Node('Boston'), Node('Providence'), Node('New York')]
-g.calculateWeightInPath(path)
+weight = g.calculateWeightInPath(path)
+print('weight is ',weight)
 #testSP('Chicago', 'Boston')
 #print()
 #testSP('Boston', 'Phoenix')
