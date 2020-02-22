@@ -15,10 +15,13 @@ class Node(object):
         return self.name
 
 class Edge(object):
-    def __init__(self, src, dest):
-        """Assumes src and dest are nodes"""
+    def __init__(self, src, dest, weight):
+        """Assumes src and dest are nodes, weight is an integer"""
         self.src = src
         self.dest = dest
+        self.weight = weight
+    def getWeight(self):
+        return self.weight
     def getSource(self):
         return self.src
     def getDestination(self):
