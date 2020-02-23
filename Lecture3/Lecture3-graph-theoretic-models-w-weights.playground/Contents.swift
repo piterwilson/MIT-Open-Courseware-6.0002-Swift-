@@ -73,7 +73,9 @@ func DFS(graph: GraphProtocol, start: Node, end: Node, path: [Node], shortest: i
             if !pathCopy.contains(node) {
                 if shortest == nil || graph.calculateWeight(in: path) < graph.calculateWeight(in: shortest) {
                     if let newPath = DFS(graph: graph, start: node, end: end, path: pathCopy, shortest: &shortest) {
-                        shortest = newPath
+                        if shortest == nil || graph.calculateWeight(in: newPath) < graph.calculateWeight(in: shortest) {
+                            shortest = newPath
+                        }
                     }
                 }
             } else {
