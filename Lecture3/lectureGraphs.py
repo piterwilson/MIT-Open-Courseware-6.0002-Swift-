@@ -44,7 +44,6 @@ class Digraph(object):
         elif len(path) == 0:
             return 0
         else:
-            print('path is ', path)
             result = 0
             for i in range(len(path) - 1):
                 source = path[i]
@@ -52,6 +51,7 @@ class Digraph(object):
                 if destination != None:
                     edge = self.getEdge(source, destination)
                     result = result + edge.getWeight()
+            print('weight for path', printPath(path), 'is', result)
             return result
     def addNode(self, node):
         if node in self.edges:
@@ -75,11 +75,11 @@ class Digraph(object):
             raise ValueError('Node not in Graph ',source)
         if dest == None:
             raise ValueError('Node not in Graph ',destination)
-        print('get edges with source',src)
+        # print('get edges with source',src)
         edges = self.edges[src]
         for edge in edges:
             if edge.getDestination() == dest:
-                print('found edge',edge)
+                # print('found edge',edge)
                 return edge
         raise ValueError('No Edge found between ',source, destination)
     def childrenOf(self, node):
@@ -131,7 +131,7 @@ def printPath(path):
         result = result + str(path[i])
         if i != len(path) - 1:
             result = result + '->'
-    return result 
+    return result
 
 def DFS(graph, start, end, path, shortest, toPrint = False):
     """Assumes graph is a Digraph; start and end are nodes;
@@ -158,9 +158,24 @@ def shortestPath(graph, start, end, toPrint = False):
        Returns a shortest path from start to end in graph"""
     return DFS(graph, start, end, [], None, toPrint)
 
+def shortestPathWeighed(graph, start, end, toPrint = False):
+    """Assumes graph is a Digraph; start and end are nodes
+       Returns a shortest path from start to end in graph taking into account weights in the Edges"""
+    return DFSWeighed(graph, start, end, [], None, toPrint)
+
 def testSP(source, destination):
     
     sp = shortestPath(g, g.getNode(source), g.getNode(destination),
+                      toPrint = True)
+    if sp != None:
+        print('Shortest path from', source, 'to',
+              destination, 'is', printPath(sp))
+    else:
+        print('There is no path from', source, 'to', destination)
+
+def testSPWeighed(source, destination):
+    
+    sp = shortestPathWeighed(g, g.getNode(source), g.getNode(destination),
                       toPrint = True)
     if sp != None:
         print('Shortest path from', source, 'to',
@@ -180,10 +195,13 @@ def DFSWeighed(graph, start, end, path, shortest, toPrint = False):
     for node in graph.childrenOf(start):
         if node not in path: #avoid cycles
             if shortest == None or graph.calculateWeightInPath(path) < graph.calculateWeightInPath(shortest):
-                newPath = DFS(graph, node, end, path, shortest,
+                newPath = DFSWeighed(graph, node, end, path, shortest,
                               toPrint)
                 if newPath != None:
-                    shortest = newPath
+                    if shortest == None or (graph.calculateWeightInPath(newPath) < graph.calculateWeightInPath(shortest)):
+                        print('New shortest path:', printPath(newPath))
+                        print('weight for new shortest path', graph.calculateWeightInPath(newPath))
+                        shortest = newPath
         elif toPrint:
             print('Already visited', node)
     return shortest
@@ -205,13 +223,14 @@ def testSP(source, destination):
 
 g = buildCityGraph(Digraph)
 print(g)
-path = [Node('Boston'), Node('Providence'), Node('New York')]
-weight = g.calculateWeightInPath(path)
 #print('weight is ',weight)
-testSP('Chicago', 'Boston')
+#testSP('Chicago', 'Boston')
+#testSPWeighed('Chicago', 'Boston')
 #print()
-#testSP('Boston', 'Phoenix')
-#print()
+testSP('Boston', 'Phoenix')
+print()
+testSPWeighed('Boston', 'Phoenix')
+print()
 
 printQueue = True 
 
