@@ -83,7 +83,7 @@ class Digraph(object):
                 return edge
         raise ValueError('No Edge found between ',source, destination)
     def childrenOf(self, node):
-        return map(lambda x: x.getDestination(), self.edges) 
+        return map(lambda x: x.getDestination(), self.edges[node]) 
     def hasNode(self, node):
         return node in self.edges
     def getNode(self, name):
@@ -168,12 +168,47 @@ def testSP(source, destination):
     else:
         print('There is no path from', source, 'to', destination)
 
+def DFSWeighed(graph, start, end, path, shortest, toPrint = False):
+    """Assumes graph is a Digraph; start and end are nodes;
+          path and shortest are lists of nodes
+       Returns a shortest path from start to end in graph taking into account the weight in the edges"""
+    path = path + [start]
+    if toPrint:
+        print('Current DFS path:', printPath(path))
+    if start == end:
+        return path
+    for node in graph.childrenOf(start):
+        if node not in path: #avoid cycles
+            if shortest == None or graph.calculateWeightInPath(path) < graph.calculateWeightInPath(shortest):
+                newPath = DFS(graph, node, end, path, shortest,
+                              toPrint)
+                if newPath != None:
+                    shortest = newPath
+        elif toPrint:
+            print('Already visited', node)
+    return shortest
+    
+def shortestPath(graph, start, end, toPrint = False):
+    """Assumes graph is a Digraph; start and end are nodes
+       Returns a shortest path from start to end in graph"""
+    return DFS(graph, start, end, [], None, toPrint)
+
+def testSP(source, destination):
+    
+    sp = shortestPath(g, g.getNode(source), g.getNode(destination),
+                      toPrint = True)
+    if sp != None:
+        print('Shortest path from', source, 'to',
+              destination, 'is', printPath(sp))
+    else:
+        print('There is no path from', source, 'to', destination)
+
 g = buildCityGraph(Digraph)
 print(g)
 path = [Node('Boston'), Node('Providence'), Node('New York')]
 weight = g.calculateWeightInPath(path)
-print('weight is ',weight)
-#testSP('Chicago', 'Boston')
+#print('weight is ',weight)
+testSP('Chicago', 'Boston')
 #print()
 #testSP('Boston', 'Phoenix')
 #print()
