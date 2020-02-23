@@ -1,9 +1,30 @@
 # -*- coding: utf-8 -*-
+import time
 """
 Created on Tue Jul 12 15:04:56 2016
 
 @author: guttag, revised egrimson
 """
+def reduce(function, iterable, initializer=None):
+    it = iter(iterable)
+    if initializer is None:
+        try:
+            initializer = next(it)
+        except StopIteration:
+            raise TypeError('reduce() of empty sequence with no initial value')
+    accum_value = initializer
+    for x in it:
+        accum_value = function(accum_value, x)
+    return accum_value
+
+class StopWatch(object):
+    def __init__(self):
+        self.startTime = None
+    def start(self):
+        self.startTime = time.time()
+    def mark(self):
+        if self.startTime != None:
+            print(time.time() - self.startTime, "seconds")
 
 class Node(object):
     def __init__(self, name):
@@ -34,6 +55,7 @@ class Digraph(object):
     its children Edges"""
     def __init__(self):
         self.edges = {}
+        self.pathsWeightsCache = {}
     def calculateWeightInPath(self, path):
         """
         Assumes path is an Array of Node.
@@ -44,6 +66,9 @@ class Digraph(object):
         elif len(path) == 0:
             return 0
         else:
+            cachedWeight = self.getCachedPathWeight(path)
+            if cachedWeight != None:
+                return cachedWeight
             result = 0
             for i in range(len(path) - 1):
                 source = path[i]
@@ -52,7 +77,16 @@ class Digraph(object):
                     edge = self.getEdge(source, destination)
                     result = result + edge.getWeight()
             print('weight for path', printPath(path), 'is', result)
+            self.cachePathWeight(path, result)
             return result
+    def cachePathWeight(self, path, weight):
+        key = reduce(lambda x, y: str(x) + str(y), path)
+        self.pathsWeightsCache[key] = weight
+    def getCachedPathWeight(self, path):
+        key = reduce(lambda x, y: str(x) + str(y), path)
+        if key in self.pathsWeightsCache:
+            return self.pathsWeightsCache[key]
+        return None
     def addNode(self, node):
         if node in self.edges:
             raise ValueError('Duplicate node')
@@ -221,15 +255,22 @@ def testSP(source, destination):
     else:
         print('There is no path from', source, 'to', destination)
 
+stopWatch = StopWatch()
+stopWatch.start()
 g = buildCityGraph(Digraph)
+print('path creation took', stopWatch.mark())
 print(g)
 #print('weight is ',weight)
 #testSP('Chicago', 'Boston')
 #testSPWeighed('Chicago', 'Boston')
 #print()
+stopWatch.start()
 testSP('Boston', 'Phoenix')
+print('SP Boston->Phoneix took', stopWatch.mark())
 print()
+stopWatch.start()
 testSPWeighed('Boston', 'Phoenix')
+print('SP Boston->Phoneix (weighed) took', stopWatch.mark())
 print()
 
 printQueue = True 
