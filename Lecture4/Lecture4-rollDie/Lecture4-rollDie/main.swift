@@ -84,9 +84,11 @@ func calculateDieRollProbability(goal: PythonObject) ->PythonObject {
  */
 func runSim(goal: PythonObject, numTrials: Int) {
     var total = 0
-    for _ in Python.range(numTrials) {
+    let numTrialsRange = Python.range(numTrials)
+    let goalRange = Python.range(Python.len(goal))
+    for _ in numTrialsRange {
         var result = PythonObject("")
-        for _ in Python.range(Python.len(goal)) {
+        for _ in goalRange {
             result += Python.str(rollDie())
         }
         if result == goal {
