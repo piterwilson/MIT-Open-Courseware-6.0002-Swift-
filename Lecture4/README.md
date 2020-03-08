@@ -9,3 +9,7 @@ Of special interest for me it will be to explore the exact limits of the [Python
 ## Example Lecture4-rollDie
 
 This quick sample goes trough the simple dice roll demonstrated in the first part of the video lecture. I created a few different versions just to test Python interoperability with Swift. 
+
+## Example Lecture4-Birthdays
+
+Quick sample with the estimated probability of a shared birthdate.
