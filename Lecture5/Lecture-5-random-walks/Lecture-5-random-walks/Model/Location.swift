@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Python
 /*
  class Location(object):
  def __init__(self, x, y):
@@ -33,12 +34,12 @@ import Foundation
  */
 
 struct Location {
-    var x: Double
-    var y: Double
-    func move(deltaX: Double, deltaY: Double) -> Location {
+    var x: PythonObject
+    var y: PythonObject
+    func move(deltaX: PythonObject, deltaY: PythonObject) -> Location {
         return Location(x: x + deltaX, y: y + deltaY)
     }
-    func distFrom(_ location: Location) -> Double {
+    func distFrom(_ location: Location) -> PythonObject {
         let xDist = x - location.x
         let yDist = y - location.y
         return (xDist ** 2 + yDist ** 2) ** 0.5
