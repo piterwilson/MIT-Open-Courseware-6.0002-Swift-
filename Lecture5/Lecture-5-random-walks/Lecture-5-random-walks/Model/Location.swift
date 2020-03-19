@@ -41,6 +41,6 @@ struct Location {
     func distFrom(_ location: Location) -> Double {
         let xDist = x - location.x
         let yDist = y - location.y
-        return (xDist ** 2 + xDist ** 2) ** 0.5
+        return (xDist ** 2 + yDist ** 2) ** 0.5
     }
 }
