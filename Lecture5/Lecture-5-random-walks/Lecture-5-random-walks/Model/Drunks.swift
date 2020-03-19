@@ -31,19 +31,6 @@ import Python
          return random.choice(stepChoices)
  */
 
-protocol Drunk {
-    var name: String { get }
-    var stepChoices: PythonObject { get }
-    var random: PythonObject { get }
-    func takeStep() -> PythonObject
-}
-
-extension Drunk {
-    func takeStep() -> PythonObject {
-        return random.choice(stepChoices)
-    }
-}
-
 struct Steps: PythonConvertible {
     var x: Double
     var y: Double
@@ -56,22 +43,45 @@ struct Steps: PythonConvertible {
     }
 }
 
-struct UsualDrunk: Drunk {
+class Drunk: Hashable {
     let name: String
     let random: PythonObject
-    let stepChoices: PythonObject = PythonObject([
-        PythonObject(Steps(0.0, 1.0)),
-        PythonObject(Steps(0.0, -1.0)),
-        PythonObject(Steps(1.0, 0.0)),
-        PythonObject(Steps(-1.0, 0.0))])
+    var stepChoices: PythonObject
+    init(name: String, stepChoices: PythonObject, random: PythonObject) {
+        self.name = name
+        self.stepChoices = stepChoices
+        self.random = random
+    }
+    func takeStep() -> PythonObject {
+        return random.choice(stepChoices)
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(stepChoices)
+    }
+    static func == (lhs: Drunk, rhs: Drunk) -> Bool {
+        return lhs.name == rhs.name && lhs.stepChoices == rhs.stepChoices
+    }
 }
 
-struct MasochistDrunk: Drunk {
-    let name: String
-    let random: PythonObject
-    let stepChoices: PythonObject = PythonObject([
-        PythonObject(Steps(0.0, 1.1)),
-        PythonObject(Steps(0.0, -0.9)),
-        PythonObject(Steps(1.0, 0.0)),
-        PythonObject(Steps(-1.0, 0.0))])
+final class UsualDrunk: Drunk {
+    init(name: String, random: PythonObject) {
+        let stepChoices: PythonObject = PythonObject([
+            PythonObject(Steps(0.0, 1.0)),
+            PythonObject(Steps(0.0, -1.0)),
+            PythonObject(Steps(1.0, 0.0)),
+            PythonObject(Steps(-1.0, 0.0))])
+        super.init(name: name, stepChoices: stepChoices, random: random)
+    }
+}
+
+final class MasochistDrunk: Drunk {
+    init(name: String, random: PythonObject) {
+        let stepChoices: PythonObject = PythonObject([
+            PythonObject(Steps(0.0, 1.1)),
+            PythonObject(Steps(0.0, -0.9)),
+            PythonObject(Steps(1.0, 0.0)),
+            PythonObject(Steps(-1.0, 0.0))])
+        super.init(name: name, stepChoices: stepChoices, random: random)
+    }
 }
