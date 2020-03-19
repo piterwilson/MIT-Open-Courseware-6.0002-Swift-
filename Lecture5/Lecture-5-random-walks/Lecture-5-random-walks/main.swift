@@ -3,7 +3,6 @@
 //  Lecture-5-random-walks
 //
 //  Created by Juan Carlos Ospina Gonzalez on 12/03/2020.
-//  Copyright © 2020 Juan Carlos Ospina Gonzalez. All rights reserved.
 //
 
 import Foundation
