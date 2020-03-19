@@ -31,18 +31,6 @@ import Python
          return random.choice(stepChoices)
  */
 
-struct Steps: PythonConvertible {
-    var x: Double
-    var y: Double
-    var pythonObject: PythonObject {
-        return PythonObject(tupleOf: PythonObject(self.x), PythonObject(self.y))
-    }
-    init(_ x: Double, _ y: Double) {
-        self.x = x
-        self.y = y
-    }
-}
-
 class Drunk: Hashable {
     let name: String
     let random: PythonObject
@@ -67,10 +55,10 @@ class Drunk: Hashable {
 final class UsualDrunk: Drunk {
     init(name: String, random: PythonObject) {
         let stepChoices: PythonObject = PythonObject([
-            PythonObject(Steps(0.0, 1.0)),
-            PythonObject(Steps(0.0, -1.0)),
-            PythonObject(Steps(1.0, 0.0)),
-            PythonObject(Steps(-1.0, 0.0))])
+            PythonObject(tupleOf: 0.0, 1.0),
+            PythonObject(tupleOf: 0.0, -1.0),
+            PythonObject(tupleOf: 1.0, 0.0),
+            PythonObject(tupleOf: -1.0, 0.0)])
         super.init(name: name, stepChoices: stepChoices, random: random)
     }
 }
@@ -78,10 +66,10 @@ final class UsualDrunk: Drunk {
 final class MasochistDrunk: Drunk {
     init(name: String, random: PythonObject) {
         let stepChoices: PythonObject = PythonObject([
-            PythonObject(Steps(0.0, 1.1)),
-            PythonObject(Steps(0.0, -0.9)),
-            PythonObject(Steps(1.0, 0.0)),
-            PythonObject(Steps(-1.0, 0.0))])
+            PythonObject(tupleOf: 0.0, 1.1),
+            PythonObject(tupleOf: 0.0, -0.9),
+            PythonObject(tupleOf: 1.0, 0.0),
+            PythonObject(tupleOf: -1.0, 0.0)])
         super.init(name: name, stepChoices: stepChoices, random: random)
     }
 }
