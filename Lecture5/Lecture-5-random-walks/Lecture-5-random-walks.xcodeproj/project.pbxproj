@@ -27,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F71AA9424234F6900E1C199 /* Lecture-5-random-walks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lecture-5-random-walks.entitlements"; sourceTree = "<group>"; };
 		4F8F6719241A1F440065264B /* Lecture-5-random-walks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Lecture-5-random-walks"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8F671C241A1F440065264B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4F8F6723241A1F530065264B /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -65,6 +66,7 @@
 		4F8F671B241A1F440065264B /* Lecture-5-random-walks */ = {
 			isa = PBXGroup;
 			children = (
+				4F71AA9424234F6900E1C199 /* Lecture-5-random-walks.entitlements */,
 				4F8F6728241A20930065264B /* Extensions */,
 				4F8F6727241A206A0065264B /* Model */,
 				4F8F671C241A1F440065264B /* main.swift */,
@@ -275,6 +277,7 @@
 		4F8F6721241A1F440065264B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Lecture-5-random-walks/Lecture-5-random-walks.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2BA7PGZ44F;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -286,6 +289,7 @@
 		4F8F6722241A1F440065264B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Lecture-5-random-walks/Lecture-5-random-walks.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2BA7PGZ44F;
 				ENABLE_HARDENED_RUNTIME = YES;
