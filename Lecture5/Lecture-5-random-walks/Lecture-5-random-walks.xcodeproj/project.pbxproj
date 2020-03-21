@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F32FF612426622000A63FF8 /* PylabUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F32FF602426622000A63FF8 /* PylabUtils.swift */; };
 		4F8F671D241A1F440065264B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F671C241A1F440065264B /* main.swift */; };
 		4F8F6724241A1F530065264B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F6723241A1F530065264B /* Location.swift */; };
 		4F8F6726241A20600065264B /* Operator+Exponential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F6725241A20600065264B /* Operator+Exponential.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F32FF602426622000A63FF8 /* PylabUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylabUtils.swift; sourceTree = "<group>"; };
 		4F71AA9424234F6900E1C199 /* Lecture-5-random-walks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lecture-5-random-walks.entitlements"; sourceTree = "<group>"; };
 		4F8F6719241A1F440065264B /* Lecture-5-random-walks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Lecture-5-random-walks"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8F671C241A1F440065264B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F32FF5F2426621000A63FF8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4F32FF602426622000A63FF8 /* PylabUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		4F8F6710241A1F440065264B = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +76,7 @@
 		4F8F671B241A1F440065264B /* Lecture-5-random-walks */ = {
 			isa = PBXGroup;
 			children = (
+				4F32FF5F2426621000A63FF8 /* Utils */,
 				4F71AA9424234F6900E1C199 /* Lecture-5-random-walks.entitlements */,
 				4F8F6728241A20930065264B /* Extensions */,
 				4F8F6727241A206A0065264B /* Model */,
@@ -154,6 +165,7 @@
 				4F8F6726241A20600065264B /* Operator+Exponential.swift in Sources */,
 				4F8F6724241A1F530065264B /* Location.swift in Sources */,
 				4F8F672A241A20B00065264B /* Field.swift in Sources */,
+				4F32FF612426622000A63FF8 /* PylabUtils.swift in Sources */,
 				4F8F671D241A1F440065264B /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
