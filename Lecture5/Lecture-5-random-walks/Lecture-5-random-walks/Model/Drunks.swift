@@ -35,6 +35,11 @@ class Drunk: Hashable {
     let name: String
     let random: PythonObject
     var stepChoices: PythonObject
+    required init(name: String, random: PythonObject) {
+        self.name = name
+        self.random = random
+        self.stepChoices = PythonObject([])
+    }
     init(name: String, stepChoices: PythonObject, random: PythonObject) {
         self.name = name
         self.stepChoices = stepChoices
@@ -53,7 +58,7 @@ class Drunk: Hashable {
 }
 
 final class UsualDrunk: Drunk {
-    init(name: String, random: PythonObject) {
+    required init(name: String, random: PythonObject) {
         let stepChoices: PythonObject = PythonObject([
             PythonObject(tupleOf: 0.0, 1.0),
             PythonObject(tupleOf: 0.0, -1.0),
@@ -64,7 +69,7 @@ final class UsualDrunk: Drunk {
 }
 
 final class MasochistDrunk: Drunk {
-    init(name: String, random: PythonObject) {
+    required init(name: String, random: PythonObject) {
         let stepChoices: PythonObject = PythonObject([
             PythonObject(tupleOf: 0.0, 1.1),
             PythonObject(tupleOf: 0.0, -0.9),
