@@ -50,7 +50,6 @@ class Drunk: Hashable {
     }
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
-        hasher.combine(stepChoices)
     }
     static func == (lhs: Drunk, rhs: Drunk) -> Bool {
         return lhs.name == rhs.name && lhs.stepChoices == rhs.stepChoices
