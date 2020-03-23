@@ -104,5 +104,13 @@ func simAll(drunkKinds: [Drunk.Type], walkLengths: [Int], numTrials: Int) {
     }
 }
 
-random.seed(0)
-simAll(drunkKinds: [UsualDrunk.self, MasochistDrunk.self], walkLengths: [1000, 10000], numTrials: 100)
+//random.seed(0)
+//simAll(drunkKinds: [UsualDrunk.self, MasochistDrunk.self], walkLengths: [1000, 10000], numTrials: 100)
+
+let xVals = [PythonObject(1), PythonObject(2), PythonObject(3), PythonObject(4)]
+let yVals1 = [PythonObject(1), PythonObject(2), PythonObject(3), PythonObject(4)]
+pylab.plot(xVals, yVals1, "b--", label: "first")
+let yVals2 = [1, 7, 3, 5]
+pylab.plot(xVals, yVals2, "r--",  label: "second")
+pylab.legend()
+pylab.show()
