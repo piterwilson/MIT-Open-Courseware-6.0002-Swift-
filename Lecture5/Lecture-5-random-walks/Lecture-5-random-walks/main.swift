@@ -66,3 +66,43 @@ func simWalks(numSteps: Int, numTrials: Int, drunkClass: Drunk.Type) -> [PythonO
         fatalError("\(error)")
     }
 }
+// print(simWalks(numSteps: 10, numTrials: 100, drunkClass: UsualDrunk.self))
+/**
+ def drunkTest(walkLengths, numTrials, dClass):
+     """Assumes walkLengths a sequence of ints >= 0
+          numTrials an int > 0, dClass a subclass of Drunk
+        For each number of steps in walkLengths, runs simWalks with
+          numTrials walks and prints results"""
+     for numSteps in walkLengths:
+         distances = simWalks(numSteps, numTrials, dClass)
+         print(dClass.__name__, 'random walk of', numSteps, 'steps')
+         print(' Mean =', round(sum(distances)/len(distances), 4))
+         print(' Max =', max(distances), 'Min =', min(distances))
+ 
+ random.seed(0)
+ drunkTest((10, 100, 1000, 10000), 100, UsualDrunk)
+ */
+func drunkTest(walkLengths: [Int], numTrials: Int, drunkClass: Drunk.Type) {
+    for numSteps in walkLengths {
+        let distances = simWalks(numSteps: numSteps, numTrials: numTrials, drunkClass: drunkClass)
+        print("\(drunkClass) random walk of \(numSteps)")
+        print("Mean = \(Double(Python.sum(distances))!/Double((distances.count)))")
+        print("Max = \(Python.max(distances)), Min \(Python.min(distances))")
+    }
+}
+random.seed(0)
+// drunkTest(walkLengths: [0, 1, 2], numTrials: 100, drunkClass: UsualDrunk.self)
+
+/**
+ def simAll(drunkKinds, walkLengths, numTrials):
+ for dClass in drunkKinds:
+     drunkTest(walkLengths, numTrials, dClass
+ */
+func simAll(drunkKinds: [Drunk.Type], walkLengths: [Int], numTrials: Int) {
+    for dClass in drunkKinds {
+        drunkTest(walkLengths: walkLengths, numTrials: numTrials, drunkClass: dClass)
+    }
+}
+
+random.seed(0)
+simAll(drunkKinds: [UsualDrunk.self, MasochistDrunk.self], walkLengths: [1000, 10000], numTrials: 100)
