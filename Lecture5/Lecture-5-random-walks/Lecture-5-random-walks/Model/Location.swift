@@ -42,6 +42,10 @@ struct Location {
     func distFrom(_ location: Location) -> PythonObject {
         let xDist = x - location.x
         let yDist = y - location.y
+//        print("xDist: \(xDist)")
+//        print("yDist: \(yDist)")
+//        print("xDist** 2: \(xDist ** 2)")
+//        print("yDist** 2: \(yDist ** 2)")
         return (xDist ** 2 + yDist ** 2) ** 0.5
     }
 }
