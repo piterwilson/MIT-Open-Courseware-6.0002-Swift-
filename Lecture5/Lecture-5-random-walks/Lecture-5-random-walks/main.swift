@@ -25,8 +25,10 @@ setupPylabGraphStyles(pylab: pylab)
 func walk(field: Field, drunk: Drunk, numSteps: Int) -> PythonObject {
     do {
         let start = try field.getLocation(for: drunk)
+        //print("start \(start)")
         for _ in 0..<numSteps {
             try field.move(drunk: drunk)
+            //print(try field.getLocation(for: drunk))
         }
         return start.distFrom(try field.getLocation(for: drunk))
     } catch {
