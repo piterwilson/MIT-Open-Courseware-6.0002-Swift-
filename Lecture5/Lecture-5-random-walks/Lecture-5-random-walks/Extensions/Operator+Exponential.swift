@@ -19,7 +19,7 @@ func ** (_ base: Double, _ exp: Double) -> Double {
 }
 
 func ** (_ base: Float, _ exp: Float) -> Float {
-  return pow(base, exp)
+  return Float(pow(Double(base), Double(exp)))
 }
 
 func ** (_ base: Int, _ exp: Int) -> Double {
