@@ -24,7 +24,7 @@ import Foundation
  */
 struct StyleIterator {
     var index: Int = 0
-    var styles: [String] = []
+    var styles: [String]
     mutating func next() -> String {
         guard styles.count > 0 else { fatalError("no styles to give") }
         let result = styles[index]

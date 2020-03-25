@@ -42,6 +42,8 @@ enum FieldError: Error {
 
 class Field {
     var drunks: [Drunk: Location] = [:]
+    required init() {
+    }
     func add(drunk: Drunk, at location: Location) throws {
         if drunks[drunk] != nil {
             throw FieldError.duplicateDrunk

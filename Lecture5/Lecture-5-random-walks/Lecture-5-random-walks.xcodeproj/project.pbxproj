@@ -30,7 +30,7 @@
 
 /* Begin PBXFileReference section */
 		4F32FF602426622000A63FF8 /* PylabUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylabUtils.swift; sourceTree = "<group>"; };
-		4F32FF7624288E2E00A63FF8 /* StyleIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StyleIterator.swift; path = "Lecture-5-random-walks/Utils/StyleIterator.swift"; sourceTree = "<group>"; };
+		4F32FF7624288E2E00A63FF8 /* StyleIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleIterator.swift; sourceTree = "<group>"; };
 		4F71AA9424234F6900E1C199 /* Lecture-5-random-walks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lecture-5-random-walks.entitlements"; sourceTree = "<group>"; };
 		4F8F6719241A1F440065264B /* Lecture-5-random-walks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Lecture-5-random-walks"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8F671C241A1F440065264B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -54,6 +54,7 @@
 		4F32FF5F2426621000A63FF8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4F32FF7624288E2E00A63FF8 /* StyleIterator.swift */,
 				4F32FF602426622000A63FF8 /* PylabUtils.swift */,
 			);
 			path = Utils;
@@ -62,7 +63,6 @@
 		4F8F6710241A1F440065264B = {
 			isa = PBXGroup;
 			children = (
-				4F32FF7624288E2E00A63FF8 /* StyleIterator.swift */,
 				4F8F671B241A1F440065264B /* Lecture-5-random-walks */,
 				4F8F671A241A1F440065264B /* Products */,
 			);
