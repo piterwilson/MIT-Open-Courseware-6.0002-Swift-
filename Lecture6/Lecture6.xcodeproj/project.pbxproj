@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F0D4CC2243C3AEE00731705 /* PylabUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D4CC1243C3AEE00731705 /* PylabUtils.swift */; };
 		4F59FFCB243C361C008CA38C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F59FFCA243C361C008CA38C /* main.swift */; };
+		4F59FFD4243C36BE008CA38C /* FairRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F59FFD3243C36BE008CA38C /* FairRoulette.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,9 +25,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F0D4CC1243C3AEE00731705 /* PylabUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylabUtils.swift; sourceTree = "<group>"; };
 		4F59FFC7243C361C008CA38C /* Lecture6 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lecture6; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F59FFCA243C361C008CA38C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4F59FFD1243C3626008CA38C /* Lecture6.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lecture6.entitlements; sourceTree = "<group>"; };
+		4F59FFD3243C36BE008CA38C /* FairRoulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FairRoulette.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F0D4CC0243C3AE200731705 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4F0D4CC1243C3AEE00731705 /* PylabUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		4F59FFBE243C361C008CA38C = {
 			isa = PBXGroup;
 			children = (
@@ -58,10 +70,20 @@
 		4F59FFC9243C361C008CA38C /* Lecture6 */ = {
 			isa = PBXGroup;
 			children = (
+				4F0D4CC0243C3AE200731705 /* Utils */,
+				4F59FFD2243C36AA008CA38C /* Model */,
 				4F59FFD1243C3626008CA38C /* Lecture6.entitlements */,
 				4F59FFCA243C361C008CA38C /* main.swift */,
 			);
 			path = Lecture6;
+			sourceTree = "<group>";
+		};
+		4F59FFD2243C36AA008CA38C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4F59FFD3243C36BE008CA38C /* FairRoulette.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +145,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F59FFCB243C361C008CA38C /* main.swift in Sources */,
+				4F0D4CC2243C3AEE00731705 /* PylabUtils.swift in Sources */,
+				4F59FFD4243C36BE008CA38C /* FairRoulette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
