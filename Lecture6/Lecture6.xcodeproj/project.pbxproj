@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4F0D4CC2243C3AEE00731705 /* PylabUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D4CC1243C3AEE00731705 /* PylabUtils.swift */; };
+		4F3F32AF243D89AE00287CDB /* EuroRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F32AE243D89AE00287CDB /* EuroRoulette.swift */; };
+		4F3F32B1243D8A6900287CDB /* AmericanRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F32B0243D8A6900287CDB /* AmericanRoulette.swift */; };
 		4F59FFCB243C361C008CA38C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F59FFCA243C361C008CA38C /* main.swift */; };
 		4F59FFD4243C36BE008CA38C /* FairRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F59FFD3243C36BE008CA38C /* FairRoulette.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		4F0D4CC1243C3AEE00731705 /* PylabUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylabUtils.swift; sourceTree = "<group>"; };
+		4F3F32AE243D89AE00287CDB /* EuroRoulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EuroRoulette.swift; sourceTree = "<group>"; };
+		4F3F32B0243D8A6900287CDB /* AmericanRoulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmericanRoulette.swift; sourceTree = "<group>"; };
 		4F59FFC7243C361C008CA38C /* Lecture6 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lecture6; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F59FFCA243C361C008CA38C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4F59FFD1243C3626008CA38C /* Lecture6.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lecture6.entitlements; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				4F59FFD3243C36BE008CA38C /* FairRoulette.swift */,
+				4F3F32AE243D89AE00287CDB /* EuroRoulette.swift */,
+				4F3F32B0243D8A6900287CDB /* AmericanRoulette.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,8 +150,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F3F32AF243D89AE00287CDB /* EuroRoulette.swift in Sources */,
 				4F59FFCB243C361C008CA38C /* main.swift in Sources */,
 				4F0D4CC2243C3AEE00731705 /* PylabUtils.swift in Sources */,
+				4F3F32B1243D8A6900287CDB /* AmericanRoulette.swift in Sources */,
 				4F59FFD4243C36BE008CA38C /* FairRoulette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

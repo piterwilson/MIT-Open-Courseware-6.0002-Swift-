@@ -27,25 +27,25 @@ import Python
  */
 
 public class FairRoulette: CustomStringConvertible {
-    private var pockets: [Int] = []
+    internal var pockets: [String] = []
     // -1 == None
-    public var ball: Int = -1
-    private var pocketOdds: Double
-    private let random: PythonObject
+    public var ball: String = ""
+    internal var pocketOdds: Double
+    internal let random: PythonObject
     public var description: String {
         "Fair Roulette"
     }
     public init() {
-        for i in 0..<37 {
-            pockets.append(i)
+        for i in 1..<37 {
+            pockets.append("\(i)")
         }
         random = Python.import("random")
         pocketOdds = Double(pockets.count - 1)
     }
     public func spin() {
-        ball = Int(random.choice(PythonObject(pockets))) ?? -1
+        ball = String(random.choice(PythonObject(pockets))) ?? ""
     }
-    public func betPocket(_ pocket: Int, amount: Double) -> Double {
+    public func betPocket(_ pocket: String, amount: Double) -> Double {
         if pocket == ball {
             return amount * pocketOdds
         } else {
