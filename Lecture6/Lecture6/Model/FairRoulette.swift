@@ -45,6 +45,7 @@ public class FairRoulette: CustomStringConvertible {
     public func spin() {
         ball = String(random.choice(PythonObject(pockets))) ?? ""
     }
+    @discardableResult
     public func betPocket(_ pocket: String, amount: Double) -> Double {
         if pocket == ball {
             return amount * pocketOdds
